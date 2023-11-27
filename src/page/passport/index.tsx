@@ -9,6 +9,21 @@ export default defineComponent({
   name: "Passport",
   setup() {
     const { navigateTo } = useRouter();
+    const testDom = (
+      <div class="test-btn-box">
+        {h(
+          ElButton,
+          { onClick: () => navigateTo("/passport/login"), type: "primary" },
+          () => "跳转到登录"
+        )}
+        {h(
+          ElButton,
+          { onClick: () => navigateTo("/passport/logon"), type: "primary" },
+          () => "跳转到注册"
+        )}
+      </div>
+    );
+
     return () => (
       <div id="passport">
         <div class="content-box">
@@ -18,28 +33,19 @@ export default defineComponent({
                 return h(
                   Transition,
                   {
-                    enterActiveClass: "animate__animated animate__flipInY",
-                    leaveActiveClass: "animate__animated animate__flipOutY",
+                    enterActiveClass:
+                      "animate__animated animate__rotateInDownLeft",
+                    leaveActiveClass:
+                      "animate__animated animate__rotateOutDownLeft",
                     mode: "out-in",
                   },
-                  Component
+                  () => Component
                 );
               },
             }}
           />
         </div>
-        <div class="test-btn-box">
-          {h(
-            ElButton,
-            { onClick: () => navigateTo("/passport/login"), type: "primary" },
-            "跳转到登录"
-          )}
-          {h(
-            ElButton,
-            { onClick: () => navigateTo("/passport/logon"), type: "primary" },
-            "跳转到注册"
-          )}
-        </div>
+        {import.meta.env.VITE_ISDEV ? testDom : null}
       </div>
     );
   },
