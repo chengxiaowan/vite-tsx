@@ -8,6 +8,7 @@ import "animate.css"; // 引入animate.css
 export default defineComponent({
   name: "Passport",
   setup() {
+    console.log((typeof(import.meta.env.VITE_ISDEV)));
     const { navigateTo } = useRouter();
     const testDom = (
       <div class="test-btn-box">
@@ -45,7 +46,9 @@ export default defineComponent({
             }}
           />
         </div>
-        {import.meta.env.VITE_ISDEV ? testDom : null}
+        {
+          import.meta.env.VITE_ISDEV === "true" ? testDom : null
+        }
       </div>
     );
   },
